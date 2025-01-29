@@ -274,7 +274,7 @@ plot_interaktif
 
 ```
 
-*Keterangan:* Grafik interaktif ini memungkinkan kita untuk tidak hanya melihat hubungan antara dua variabel (pendapatan per kapita dan angka harapan hidup), tetapi juga mengeksplorasi data secara lebih dinamis dan interaktif. Menggunakan Plotly, kita dapat berinteraksi dengan grafik untuk mendapatkan informasi lebih detail atau melihat data dari perspektif yang berbeda.Dan sebenarnya saya berencana untuk membuat plotnya per negara tetapi terlalu berat untuk dirender yang pada akhirnya saya memilih untuk membagi lokasinya menjadi perbenua.
+*Keterangan:* Grafik interaktif ini memungkinkan kita untuk tidak hanya melihat hubungan antara dua variabel (pendapatan per kapita dan angka harapan hidup), tetapi juga mengeksplorasi data secara lebih dinamis dan interaktif. Menggunakan Plotly, kita dapat berinteraksi dengan grafik untuk mendapatkan informasi lebih detail atau melihat data dari perspektif yang berbeda. Dan sebenarnya saya berencana untuk membuat plotnya per negara tetapi terlalu berat untuk dirender yang pada akhirnya saya memilih untuk membagi lokasinya menjadi perbenua.
 
 Bagaimana Grafik Interaktif Dibaca:
 
