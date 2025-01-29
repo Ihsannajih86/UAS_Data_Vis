@@ -1,6 +1,6 @@
 ---
 title: "My Document"
-author: "Deden Istiawan-Institut Teknologi Statistika dan Bisnis Muhammadiyah"
+author: "Muhammad Ihsan Najih Amani-Institut Teknologi Statistika dan Bisnis Muhammadiyah"
 date: "`r Sys.Date()`"
 output: 
   html_document:
@@ -16,31 +16,129 @@ bibliography: references.bib
 ```{=html}
 <style>
 body{
-text-align: justify}
+  text-align: justify;
+  background-color: #f8f9fa;
+  color: #343a40;
+}
+h1, h2, h3 {
+  color: #007bff;
+}
 </style>
 ```
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+
+# Tujuan Analisis
+
+Analisis ini bertujuan untuk Memenuhi Tugas Besar Mata Kuliah Visualisasi Data yang diampu Oleh Bapak Dosen Deden Istiawan S.Kom M.Kom dan juga untuk memahami pola dalam dataset melalui visualisasi data. Dengan grafik univariat, bivariat, multivariat, dan interaktif, kita dapat mengidentifikasi tren serta hubungan antar variabel. Hasil analisis didokumentasikan di R Markdown dan dipublikasikan via GitHub Pages.
+
+
+
+## Alasan
+
+# Visualisasi Data
+## Import data
+```{r}
+
+library(ggplot2)
+library(plotly)
+library(dplyr)
+library(readxl)
+
+Data <- read.csv("Data.csv")
+View(Data)
 ```
-
-# R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents [@deCarvalho2012]. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
+## Grafik univarat(Histogram)
+```{r}
+# Membuat histogram untuk melihat distribusi angka harapan hidup
+ggplot(Data, aes(x = Angka_Harapan_Hidup)) +
+  geom_histogram(binwidth = 2, fill = "#007bff", color = "white", alpha = 0.8) +
+  labs(title = "Distribusi Angka Harapan Hidup", x = "Angka Harapan Hidup", y = "Frekuensi") +
+  theme_minimal(base_size = 14)
 ```
+*Keterangan:* Histogram ini menunjukkan distribusi angka harapan hidup di dataset, membantu memahami sebaran nilai dalam populasi.
 
-## Including Plots
 
-You can also embed plots, for example:
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+  
+## Grafik Bivariat (Scatter Plot)
+```{r}
+# Scatter plot untuk melihat hubungan antara pendapatan per kapita dan angka harapan hidup
+ggplot(Data, aes(x = Pendapatan_per_kapita, y = Angka_Harapan_Hidup)) +
+  geom_point(color = "#28a745", size = 3, alpha = 0.7) +
+  labs(title = "Hubungan Pendapatan dan Harapan Hidup", x = "Pendapatan per Kapita", y = "Angka Harapan Hidup") +
+  theme_minimal(base_size = 14)
 ```
+*Keterangan:* Scatter plot ini menunjukkan hubungan antara pendapatan per kapita dan angka harapan hidup. Semakin tinggi pendapatan, angka harapan hidup cenderung meningkat.
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
 
-# Referensi
+## Grafik Multivariat (Heatmap)
+```{r}
+library(ggplot2)
+library(reshape2)
+
+# Data: Korelasi antar variabel
+data_matrix <- Data %>% select(Angka_Harapan_Hidup, Pendapatan_per_kapita, Populasi, Jumlah_anak) %>% cor()
+
+# Membuat data frame dari matriks korelasi
+df <- melt(data_matrix)
+
+# Membuat heatmap dengan ggplot2
+ggplot(df, aes(x = Var1, y = Var2, fill = value)) +
+  geom_tile() +
+  scale_fill_viridis_c() +
+  labs(title = "Heatmap Korelasi", x = "Variabel", y = "Variabel") +
+  theme_minimal(base_size = 14)
+
+```
+*Keterangan:* Heatmap ini menunjukkan korelasi antar variabel dalam dataset. Warna yang lebih gelap menunjukkan korelasi yang lebih kuat antara variabel.
+
+```
+```{r}
+## Grafik Intraktif (Plotly)
+```{r}
+library(ggplot2)
+library(plotly)
+library(RColorBrewer)
+
+# Daftar benua
+benua <- c("Asia", "Europe", "Africa", "North America", "South America", "Oceania", "Antarctica")
+
+# Ganti rentang tahun menjadi dari 1800 hingga 2024
+tahun <- 1800:2024
+
+set.seed(123)
+n <- length(benua) * length(tahun)  # Jumlah data per benua diperluas untuk setiap tahun dari 1800 hingga 2024
+
+df <- data.frame(
+  Pendapatan_per_kapita = rnorm(n, mean = 30000, sd = 10000),
+  Angka_Harapan_Hidup = rnorm(n, mean = 70, sd = 10),
+  benua = rep(benua, each = length(tahun)),
+  tahun = rep(tahun, times = length(benua)),
+  nilai = rnorm(n, mean = 50, sd = 10)
+)
+
+# Warna unik untuk setiap benua
+warna_benua <- colorRampPalette(brewer.pal(12, "Paired"))(length(unique(df$benua)))
+
+# Plot ggplot2
+g <- ggplot(df, aes(x = Pendapatan_per_kapita, y = Angka_Harapan_Hidup, color = benua, size = nilai, frame = tahun)) +
+  geom_point(alpha = 0.7) +
+  scale_color_manual(values = warna_benua) +
+  labs(title = "Interaktif: Hubungan Pendapatan per Kapita dan Angka Harapan Hidup Berdasarkan Benua dan Tahun",
+       x = "Pendapatan per Kapita", y = "Angka Harapan Hidup") +
+  theme_minimal(base_size = 14) +
+  scale_size(range = c(1, 10))  # Atur ukuran titik sesuai nilai
+
+# Konversi ke plotly
+plot_interaktif <- ggplotly(g)
+
+plot_interaktif
+
+```
+*Keterangan:* Scatter plot ini memungkinkan pengguna untuk mengeksplorasi hubungan antara pendapatan dan angka harapan hidup secara interaktif, termasuk melihat perbedaan berdasarkan benua.
+
+# Kesimpulan
+
+- Distribusi angka harapan hidup menunjukkan pola tertentu dengan kecenderungan tertentu.
+- Scatter plot mengindikasikan hubungan antara pendapatan dan angka harapan hidup, di mana negara dengan pendapatan lebih tinggi cenderung memiliki angka harapan hidup lebih tinggi.
+- Heatmap memperlihatkan korelasi antar variabel dalam dataset, membantu memahami hubungan antar faktor.
+- Visualisasi interaktif dengan Plotly memungkinkan eksplorasi data yang lebih mendalam.
