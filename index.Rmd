@@ -1,5 +1,5 @@
 ---
-title: "My Document"
+title: "UAS Visualisasi DATA"
 author: "Muhammad Ihsan Najih Amani-Institut Teknologi Statistika dan Bisnis Muhammadiyah"
 date: "`r Sys.Date()`"
 output: 
@@ -28,13 +28,13 @@ h1, h2, h3 {
 
 # Tujuan Analisis
 
-Analisis ini bertujuan untuk Memenuhi Tugas Besar Mata Kuliah Visualisasi Data yang diampu Oleh Bapak Dosen Deden Istiawan S.Kom M.Kom dan juga untuk memahami pola dalam dataset melalui visualisasi data. Dengan grafik univariat, bivariat, multivariat, dan interaktif, kita dapat mengidentifikasi tren serta hubungan antar variabel. Hasil analisis didokumentasikan di R Markdown dan dipublikasikan via GitHub Pages.
+Analisis ini bertujuan untuk memenuhi Tugas Besar Mata Kuliah Visualisasi Data yang diampu oleh Bapak Dosen Deden Istiawan S.Kom M.Kom. Selain itu, analisis ini bertujuan untuk memahami pola dalam dataset melalui visualisasi data yang mencakup grafik univariat, bivariat, multivariat, dan interaktif. Dengan pendekatan visualisasi ini, kita dapat mengidentifikasi tren dan hubungan antar variabel yang lebih mudah dipahami.
 
 
 
-## Alasan
 
 # Visualisasi Data
+
 ## Import data
 ```{r}
 
@@ -46,17 +46,50 @@ library(readxl)
 Data <- read.csv("Data.csv")
 View(Data)
 ```
+
+
 ## Grafik univarat(Histogram)
 ```{r}
 # Membuat histogram untuk melihat distribusi angka harapan hidup
 ggplot(Data, aes(x = Angka_Harapan_Hidup)) +
   geom_histogram(binwidth = 2, fill = "#007bff", color = "white", alpha = 0.8) +
-  labs(title = "Distribusi Angka Harapan Hidup", x = "Angka Harapan Hidup", y = "Frekuensi") +
+  labs(title = "Distribusi Angka Harapan Hidup", x = "Angka Harapan Hidup", y = "Populasi") +
   theme_minimal(base_size = 14)
 ```
-*Keterangan:* Histogram ini menunjukkan distribusi angka harapan hidup di dataset, membantu memahami sebaran nilai dalam populasi.
+*Keterangan:*
+Histogram adalah jenis grafik yang digunakan untuk melihat distribusi dari satu variabel numerik, dalam hal ini adalah "Angka Harapan Hidup." Distribusi ini menunjukkan bagaimana data tersebar atau terdistribusi dalam rentang nilai yang ada.
 
+Bagaimana Histogram Dibaca:
 
+Sumbu X (horizontal) menunjukkan rentang nilai dari variabel yang sedang dianalisis, dalam hal ini "Angka Harapan Hidup." Ini berarti sumbu X akan menunjukkan angka-angka yang mewakili tingkat harapan hidup (misalnya, 60, 70, 80 tahun).
+Sumbu Y (vertikal) menunjukkan frekuensi atau jumlah data yang berada dalam rentang nilai tertentu. Misalnya, berapa banyak negara yang memiliki angka harapan hidup antara 60 hingga 62 tahun.
+Apa yang Ditampilkan oleh Histogram:
+
+Bentuk Histogram:
+
+Setiap "batang" dalam histogram mewakili rentang angka tertentu, dan tinggi batang menunjukkan berapa banyak negara yang memiliki angka harapan hidup dalam rentang tersebut.
+Jika batangnya tinggi, berarti banyak negara yang memiliki angka harapan hidup dalam rentang tersebut.
+Jika batangnya pendek, berarti hanya sedikit negara yang memiliki angka harapan hidup dalam rentang tersebut.
+
+Penjelasan Visual:
+
+Batang Biru: Setiap batang yang ada di histogram ini berwarna biru. Warna biru ini hanya berfungsi untuk memberi penekanan visual, dan tidak mempengaruhi makna dari data.
+
+Ukuran Batang (Binwidth): 
+
+Panjang batang ini disebut binwidth dan menunjukkan rentang data yang dikelompokkan. Dalam contoh ini, kita mengelompokkan data dengan lebar 2 tahun, artinya setiap batang mewakili rentang angka harapan hidup yang berbeda, seperti 60-62 tahun, 62-64 tahun, dan seterusnya.
+Apa yang Bisa Kita Pelajari dari Histogram:
+
+Jika Histogramnya Memuncak di Tengah:
+
+Ini menunjukkan bahwa sebagian besar negara memiliki angka harapan hidup yang berada di sekitar angka tertentu, misalnya sekitar 70 tahun.
+
+Jika Histogramnya Terpencar: 
+
+Ini menunjukkan bahwa angka harapan hidup tersebar secara lebih merata di berbagai rentang, tanpa ada nilai yang mendominasi.
+Jika Histogramnya Skewed (Miring):
+
+Jika batang-batangnya lebih tinggi di sebelah kiri atau kanan, itu menunjukkan bahwa sebagian besar negara memiliki angka harapan hidup yang lebih rendah atau lebih tinggi, tergantung dari sisi mana batangnya lebih tinggi.
 
   
 ## Grafik Bivariat (Scatter Plot)
@@ -67,7 +100,53 @@ ggplot(Data, aes(x = Pendapatan_per_kapita, y = Angka_Harapan_Hidup)) +
   labs(title = "Hubungan Pendapatan dan Harapan Hidup", x = "Pendapatan per Kapita", y = "Angka Harapan Hidup") +
   theme_minimal(base_size = 14)
 ```
-*Keterangan:* Scatter plot ini menunjukkan hubungan antara pendapatan per kapita dan angka harapan hidup. Semakin tinggi pendapatan, angka harapan hidup cenderung meningkat.
+*Keterangan:*
+Scatter plot adalah jenis grafik yang digunakan untuk melihat hubungan atau korelasi antara dua variabel. Dalam hal ini, kita ingin melihat apakah ada hubungan antara pendapatan per kapita dan angka harapan hidup di negara-negara yang ada dalam dataset.
+
+Bagaimana Scatter Plot Dibaca:
+
+Sumbu X (horizontal): 
+
+Menunjukkan nilai dari pendapatan per kapita. Ini berarti sumbu X akan menunjukkan seberapa besar pendapatan rata-rata setiap orang di negara-negara tersebut (misalnya, 5.000, 10.000, 20.000 dolar).
+
+Sumbu Y (vertikal):
+
+Menunjukkan angka harapan hidup, yaitu seberapa lama rata-rata penduduk di negara tersebut diperkirakan untuk hidup (misalnya, 60 tahun, 70 tahun, 80 tahun).
+
+Apa yang Ditampilkan oleh Scatter Plot:
+
+Titik (Point): Setiap titik pada scatter plot mewakili satu negara dalam dataset, dengan posisi titik tersebut menunjukkan nilai pendapatan per kapita di sumbu X dan nilai angka harapan hidup di sumbu Y.
+Titik yang lebih tinggi di sumbu Y menunjukkan negara dengan angka harapan hidup yang lebih tinggi.
+Titik yang lebih ke kanan di sumbu X menunjukkan negara dengan pendapatan per kapita yang lebih tinggi.
+
+Penjelasan Visual:
+
+Warna Titik:
+
+Titik-titik pada plot ini berwarna hijau. Warna hijau hanya digunakan untuk memberikan penekanan visual dan tidak mengubah makna data.
+
+Ukuran Titik: 
+
+Ukuran titik bisa menggambarkan faktor lain seperti jumlah populasi, tetapi dalam contoh ini hanya digunakan ukuran standar untuk setiap titik.
+
+Apa yang Bisa Kita Pelajari dari Scatter Plot:
+
+Hubungan Positif:
+
+Jika titik-titik membentuk pola yang menaik dari kiri bawah ke kanan atas, ini menunjukkan hubungan positif antara dua variabel. Artinya, semakin tinggi pendapatan per kapita, semakin tinggi pula angka harapan hidup. Misalnya, negara dengan pendapatan per kapita yang lebih tinggi cenderung memiliki sistem kesehatan yang lebih baik, yang meningkatkan angka harapan hidup.
+
+Hubungan Negatif:
+
+Jika titik-titik membentuk pola yang menurun dari kiri atas ke kanan bawah, ini menunjukkan hubungan negatif. Artinya, semakin tinggi pendapatan per kapita, angka harapan hidup malah semakin rendah. Meskipun ini jarang terjadi, hal ini bisa terjadi dalam beberapa kondisi ekstrem.
+
+Tidak Ada Hubungan:
+
+Jika titik-titik tersebar tanpa pola yang jelas, ini menunjukkan tidak ada korelasi antara kedua variabel tersebut. Artinya, pendapatan per kapita tidak memengaruhi angka harapan hidup.
+
+Contoh Interpretasi:
+
+Titik yang Terpencar di Bagian Kiri: Jika banyak negara dengan pendapatan rendah tetapi memiliki angka harapan hidup tinggi, ini bisa menunjukkan bahwa faktor-faktor lain (seperti kualitas kesehatan atau kebijakan sosial) lebih berpengaruh terhadap angka harapan hidup daripada hanya pendapatan.
+Titik yang Terpencar di Bagian Kanan: Jika negara-negara dengan pendapatan tinggi sebagian besar memiliki angka harapan hidup yang lebih tinggi, kita dapat mengasumsikan bahwa pendapatan tinggi berhubungan dengan angka harapan hidup yang lebih tinggi, meskipun tidak selalu berlaku untuk semua negara.
 
 
 ## Grafik Multivariat (Heatmap)
@@ -81,18 +160,78 @@ data_matrix <- Data %>% select(Angka_Harapan_Hidup, Pendapatan_per_kapita, Popul
 # Membuat data frame dari matriks korelasi
 df <- melt(data_matrix)
 
-# Membuat heatmap dengan ggplot2
+# Membuat heatmap dengan ggplot2 yang lebih mudah dimengerti
 ggplot(df, aes(x = Var1, y = Var2, fill = value)) +
   geom_tile() +
-  scale_fill_viridis_c() +
-  labs(title = "Heatmap Korelasi", x = "Variabel", y = "Variabel") +
-  theme_minimal(base_size = 14)
+  scale_fill_gradient2(low = "red", high = "green", mid = "yellow", midpoint = 0, 
+                       breaks = c(-1, 0, 1), labels = c("Sangat Negatif", "Tidak Ada Korelasi", "Sangat Positif")) +
+  labs(title = "Korelasi Antar Variabel", 
+       x = "Variabel", 
+       y = "Variabel", 
+       fill = "Tingkat Korelasi") +
+  theme_minimal(base_size = 14) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) # Agar label x lebih mudah dibaca
 
 ```
-*Keterangan:* Heatmap ini menunjukkan korelasi antar variabel dalam dataset. Warna yang lebih gelap menunjukkan korelasi yang lebih kuat antara variabel.
+*Keterangan:* 
+Heatmap ini digunakan untuk menggambarkan korelasi antar variabel dalam dataset. Korelasi mengacu pada hubungan atau pengaruh yang ada antara dua variabel. Korelasi dapat menunjukkan apakah dua variabel bergerak dalam arah yang sama, berlawanan, atau tidak ada hubungan sama sekali. Dalam visualisasi ini, kita memiliki empat variabel yang
+saling berkaitan:
 
-```
-```{r}
+Angka Harapan Hidup
+Pendapatan per Kapita
+Populasi
+Jumlah Anak
+Bagaimana Heatmap Dibaca:
+
+Warna:
+
+Setiap kotak pada heatmap memiliki warna yang mewakili tingkat korelasi antara dua variabel. Warna yang lebih terang atau lebih gelap menunjukkan tingkat korelasi yang lebih kuat.
+
+Merah:
+
+Korelasi yang sangat negatif. Artinya, ketika nilai satu variabel meningkat, nilai variabel lainnya cenderung menurun. Contoh:
+jika pendapatan per kapita meningkat, angka harapan hidup bisa menurun.
+
+Kuning:
+
+Korelasi yang lemah atau tidak ada korelasi. Ini menunjukkan bahwa kedua variabel tidak saling mempengaruhi secara signifikan. Contoh: pendapatan per kapita mungkin tidak banyak memengaruhi jumlah anak.
+
+Hijau:
+
+Korelasi yang sangat positif. Artinya, ketika nilai satu variabel meningkat, nilai variabel lainnya juga cenderung meningkat. 
+
+Contoh:
+
+pendapatan per kapita yang tinggi seringkali terkait dengan angka harapan hidup yang tinggi.
+
+Teks pada Skala Warna:
+
+Sangat Negatif:
+
+Korelasi yang sangat kuat dan berlawanan. Misalnya, jika pendapatan per kapita meningkat, angka harapan hidup bisa menurun secara signifikan.
+
+Tidak Ada Korelasi:
+
+Tidak ada hubungan yang jelas antara kedua variabel tersebut. Kenaikan atau penurunan salah satu variabel tidak mempengaruhi variabel lainnya.
+
+Sangat Positif:
+
+Korelasi yang sangat kuat dan searah. Artinya, ketika satu variabel meningkat, variabel lainnya juga cenderung meningkat.
+
+Contoh Interpretasi:
+
+Angka Harapan Hidup vs Pendapatan per Kapita: Jika kotak yang berisi korelasi antara "Angka Harapan Hidup" dan "Pendapatan per Kapita" berwarna hijau, ini menunjukkan bahwa kedua variabel ini memiliki korelasi positif yang kuat. Artinya, semakin tinggi pendapatan per kapita suatu negara, semakin tinggi angka harapan hidup penduduknya.
+
+Populasi vs Jumlah Anak:
+
+Jika korelasi antara populasi dan jumlah anak berwarna kuning atau merah, ini berarti bahwa kedua variabel tersebut mungkin tidak banyak berhubungan atau justru berhubungan secara negatif, misalnya, di beberapa negara yang lebih maju, jumlah anak per keluarga mungkin lebih rendah meskipun populasi negara tersebut besar.
+
+Mengapa Korelasi Itu Penting:
+
+Memahami korelasi antar variabel membantu kita untuk mengetahui faktor-faktor apa saja yang saling mempengaruhi. Misalnya, jika kita tahu bahwa pendapatan per kapita sangat berkorelasi dengan angka harapan hidup, kita bisa merencanakan kebijakan yang mendukung peningkatan pendapatan guna meningkatkan kualitas hidup masyarakat.
+
+
+
 ## Grafik Intraktif (Plotly)
 ```{r}
 library(ggplot2)
@@ -134,11 +273,90 @@ plot_interaktif <- ggplotly(g)
 plot_interaktif
 
 ```
-*Keterangan:* Scatter plot ini memungkinkan pengguna untuk mengeksplorasi hubungan antara pendapatan dan angka harapan hidup secara interaktif, termasuk melihat perbedaan berdasarkan benua.
+
+*Keterangan:* Grafik interaktif ini memungkinkan kita untuk tidak hanya melihat hubungan antara dua variabel (pendapatan per kapita dan angka harapan hidup), tetapi juga mengeksplorasi data secara lebih dinamis dan interaktif. Menggunakan Plotly, kita dapat berinteraksi dengan grafik untuk mendapatkan informasi lebih detail atau melihat data dari perspektif yang berbeda.Dan sebenarnya saya berencana untuk membuat plotnya per negara tetapi terlalu berat untuk dirender yang pada akhirnya saya memilih untuk membagi lokasinya menjadi perbenua.
+
+Bagaimana Grafik Interaktif Dibaca:
+
+Sumbu X (horizontal):
+
+Menunjukkan pendapatan per kapita (berapa besar pendapatan rata-rata setiap orang di negara-negara tersebut).
+
+Sumbu Y (vertikal):
+
+Menunjukkan angka harapan hidup (berapa lama rata-rata penduduk di negara tersebut diperkirakan untuk hidup).
+
+Titik pada Grafik:
+
+Setiap titik mewakili satu negara pada tahun tertentu. Letak titik menunjukkan nilai pendapatan per kapita dan angka harapan hidup untuk negara tersebut pada tahun itu.
+
+Warna Titik: 
+
+Setiap benua memiliki warna yang berbeda. Misalnya, negara-negara Asia mungkin berwarna biru, sementara negara-negara Eropa mungkin berwarna merah. Ini memungkinkan kita untuk melihat pola per benua.
+lah populasi atau ukuran ekonomi negara). Titik yang lebih besar mungkin menunjukkan negara dengan nilai lebih tinggi dalam kategori tertentu.
+
+Apa yang Bisa Kita Lakukan dengan Grafik Interaktif:
+
+Hover: 
+
+Saat kita mengarahkan kursor ke salah satu titik, kita akan melihat informasi lebih detail, seperti nama negara, nilai pendapatan per kapita, angka harapan hidup, dan tahun yang bersangkutan.
+Klik dan Pilih: Kita bisa memilih atau memfilter data berdasarkan benua atau tahun untuk lebih fokus pada kelompok tertentu.
+
+Animasi:
+Jika data kita mencakup waktu (seperti tahun), kita bisa mengaktifkan animasi untuk melihat bagaimana hubungan antara pendapatan per kapita dan angka harapan hidup berubah sepanjang waktu. Ini memberikan pemahaman yang lebih dinamis tentang bagaimana data berkembang dari tahun ke tahun.
+
+Penjelasan Visual:
+
+Warna:
+
+Warna yang berbeda untuk setiap benua memudahkan kita melihat pola yang mungkin ada di masing-masing wilayah dunia. Misalnya, kita bisa melihat apakah negara-negara di Asia memiliki pola yang berbeda dengan negara-negara di Eropa dalam hal pendapatan dan angka harapan hidup.
+
+Ukuran Titik: 
+
+Dengan menggunakan ukuran titik, kita bisa mendapatkan informasi tambahan tentang ukuran atau skala negara yang ada dalam dataset. Titik yang lebih besar mungkin menunjukkan negara dengan jumlah populasi atau nilai ekonomi yang lebih tinggi.
+
+Apa yang Bisa Kita Pelajari dari Grafik Ini:
+
+Hubungan antar Variabel:
+
+Apakah negara dengan pendapatan per kapita yang lebih tinggi memiliki angka harapan hidup yang lebih tinggi? Grafik ini membantu kita menjawab pertanyaan itu dengan menunjukkan hubungan antara dua variabel tersebut.
+
+Perbedaan Antar Benua:
+
+Dengan warna yang berbeda untuk setiap benua, kita bisa mengeksplorasi apakah ada pola atau tren yang unik di setiap benua. Misalnya, apakah benua dengan pendapatan per kapita yang lebih tinggi cenderung memiliki angka harapan hidup yang lebih tinggi?
+
+Perkembangan dari Tahun ke Tahun:
+
+Jika kita menganimasikan data berdasarkan tahun, kita dapat melihat bagaimana hubungan antara pendapatan per kapita dan angka harapan hidup berubah dari waktu ke waktu.
+
 
 # Kesimpulan
 
-- Distribusi angka harapan hidup menunjukkan pola tertentu dengan kecenderungan tertentu.
-- Scatter plot mengindikasikan hubungan antara pendapatan dan angka harapan hidup, di mana negara dengan pendapatan lebih tinggi cenderung memiliki angka harapan hidup lebih tinggi.
-- Heatmap memperlihatkan korelasi antar variabel dalam dataset, membantu memahami hubungan antar faktor.
-- Visualisasi interaktif dengan Plotly memungkinkan eksplorasi data yang lebih mendalam.
+Kesimpulan Analisis Visualisasi Data:
+## Distribusi Angka Harapan Hidup (Histogram):
+
+Histogram menunjukkan distribusi angka harapan hidup di berbagai negara dalam dataset. Dari grafik ini, kita bisa melihat sebaran atau pola angka harapan hidup dalam populasi, apakah cenderung terkonsentrasi pada angka tertentu atau tersebar merata.
+Sebagian besar negara dalam dataset memiliki angka harapan hidup di rentang tertentu, dengan beberapa negara memiliki angka harapan hidup yang jauh lebih tinggi atau rendah. Dengan memvisualisasikan distribusi ini, kita dapat memahami karakteristik umum dari angka harapan hidup di negara-negara tersebut, apakah angka harapan hidup cenderung tinggi atau rendah.
+
+## Hubungan Antara Pendapatan per Kapita dan Angka Harapan Hidup (Scatter Plot):
+
+Scatter plot menunjukkan adanya hubungan positif antara pendapatan per kapita dan angka harapan hidup. Negara dengan pendapatan lebih tinggi cenderung memiliki angka harapan hidup yang lebih tinggi.
+Titik-titik pada grafik ini mengindikasikan bahwa negara-negara yang lebih kaya umumnya memiliki sistem kesehatan yang lebih baik dan fasilitas lainnya yang mendukung peningkatan kualitas hidup, yang pada akhirnya meningkatkan angka harapan hidup. Ada korelasi yang jelas antara pendapatan per kapita dan angka harapan hidup, yang menunjukkan bahwa faktor ekonomi sangat mempengaruhi kualitas hidup penduduk.
+
+## Korelasi Antar Variabel (Heatmap):
+
+Heatmap memberikan gambaran visual mengenai korelasi antar berbagai variabel dalam dataset, seperti antara angka harapan hidup, pendapatan per kapita, populasi, dan jumlah anak.
+Dari heatmap, terlihat bahwa angka harapan hidup dan pendapatan per kapita memiliki korelasi positif yang kuat. Variabel lainnya, seperti populasi dan jumlah anak, menunjukkan hubungan yang lebih lemah dengan angka harapan hidup. Dengan melihat heatmap, kita bisa menyimpulkan bahwa faktor ekonomi (pendapatan per kapita) adalah salah satu yang paling berpengaruh terhadap angka harapan hidup, sementara faktor-faktor lain seperti jumlah anak atau populasi tidak begitu berpengaruh besar.
+
+## Grafik Interaktif (Plotly):
+
+Grafik interaktif memungkinkan pengguna untuk eksplorasi data secara lebih mendalam dan melihat hubungan antar variabel dengan cara yang lebih fleksibel dan dinamis.
+Dalam grafik ini, kita dapat melihat hubungan antara pendapatan per kapita dan angka harapan hidup berdasarkan benua dan tahun. Data interaktif ini memberikan wawasan yang lebih besar tentang perbedaan antara benua dan bagaimana hubungan ini berubah sepanjang waktu.
+Dengan plot interaktif, kita bisa menggali lebih dalam tentang perbedaan antar benua dan melihat bagaimana faktor-faktor ekonomi dan kesehatan berkembang selama beberapa dekade. Grafik ini memberikan pengguna kemampuan untuk mengeksplorasi data lebih lanjut dengan cara yang lebih interaktif dan informatif.
+
+##Kesimpulan akhir:
+
+Hubungan antara pendapatan dan angka harapan hidup terlihat jelas di semua grafik, dengan pendapatan yang lebih tinggi sering kali terkait dengan angka harapan hidup yang lebih tinggi. Hal ini mengindikasikan bahwa faktor ekonomi sangat memengaruhi kualitas hidup, terutama dalam aspek kesehatan dan harapan hidup.
+Visualisasi multivariat (heatmap) membantu mengidentifikasi variabel-variabel yang saling berhubungan dan memberikan pemahaman yang lebih dalam tentang faktor-faktor yang mempengaruhi angka harapan hidup.
+Grafik interaktif membuka kesempatan bagi pengguna untuk lebih mendalami data secara individual dan dinamis, memungkinkan analisis yang lebih detail berdasarkan lokasi (benua) dan waktu (tahun).
+Secara keseluruhan, analisis visualisasi ini memberikan gambaran yang jelas tentang bagaimana faktor ekonomi dan sosial berpengaruh terhadap angka harapan hidup, serta memberi peluang untuk eksplorasi data yang lebih mendalam melalui berbagai jenis visualisasi yang interaktif.
