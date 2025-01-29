@@ -1,6 +1,7 @@
 ---
 title: "UAS Visualisasi Data"
 author: "Muhammad Ihsan Najih Amani-Institut Teknologi Statistika dan Bisnis Muhammadiyah"
+NIM: "A3202300031"
 date: "`r Sys.Date()`"
 output: 
   html_document:
@@ -35,20 +36,29 @@ Analisis ini bertujuan untuk memenuhi Tugas Besar Mata Kuliah Visualisasi Data y
 
 # Visualisasi Data
 
+Nama: Muhammad Ihsan Najih Amani
+
+NIM: A3202300031
+
+Semester : 3
+
+Matkul: Visualisasi Data
+
 ## Import data
+berikut beberapa packages yang saya instal untuk pembuatan UAS ini:
 
-
-
-## Grafik univarat(Histogram)
 ```{r}
-
 library(ggplot2)
 library(plotly)
 library(dplyr)
 library(readxl)
-
 Data <- read.csv("Data.csv")
 View(Data)
+```
+
+
+## Grafik univarat(Histogram)
+```{r}
 # Membuat histogram untuk melihat distribusi angka harapan hidup
 ggplot(Data, aes(x = Angka_Harapan_Hidup)) +
   geom_histogram(binwidth = 2, fill = "#007bff", color = "white", alpha = 0.8) +
