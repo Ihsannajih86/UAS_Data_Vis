@@ -1,5 +1,5 @@
 ---
-title: "UAS Visualisasi DATA"
+title: "UAS Visualisasi Data"
 author: "Muhammad Ihsan Najih Amani-Institut Teknologi Statistika dan Bisnis Muhammadiyah"
 date: "`r Sys.Date()`"
 output: 
@@ -36,6 +36,10 @@ Analisis ini bertujuan untuk memenuhi Tugas Besar Mata Kuliah Visualisasi Data y
 # Visualisasi Data
 
 ## Import data
+
+
+
+## Grafik univarat(Histogram)
 ```{r}
 
 library(ggplot2)
@@ -45,17 +49,13 @@ library(readxl)
 
 Data <- read.csv("Data.csv")
 View(Data)
-```
-
-
-## Grafik univarat(Histogram)
-```{r}
 # Membuat histogram untuk melihat distribusi angka harapan hidup
 ggplot(Data, aes(x = Angka_Harapan_Hidup)) +
   geom_histogram(binwidth = 2, fill = "#007bff", color = "white", alpha = 0.8) +
   labs(title = "Distribusi Angka Harapan Hidup", x = "Angka Harapan Hidup", y = "Populasi") +
   theme_minimal(base_size = 14)
 ```
+
 *Keterangan:*
 Histogram adalah jenis grafik yang digunakan untuk melihat distribusi dari satu variabel numerik, dalam hal ini adalah "Angka Harapan Hidup." Distribusi ini menunjukkan bagaimana data tersebar atau terdistribusi dalam rentang nilai yang ada.
 
@@ -100,6 +100,7 @@ ggplot(Data, aes(x = Pendapatan_per_kapita, y = Angka_Harapan_Hidup)) +
   labs(title = "Hubungan Pendapatan dan Harapan Hidup", x = "Pendapatan per Kapita", y = "Angka Harapan Hidup") +
   theme_minimal(base_size = 14)
 ```
+
 *Keterangan:*
 Scatter plot adalah jenis grafik yang digunakan untuk melihat hubungan atau korelasi antara dua variabel. Dalam hal ini, kita ingin melihat apakah ada hubungan antara pendapatan per kapita dan angka harapan hidup di negara-negara yang ada dalam dataset.
 
@@ -173,6 +174,7 @@ ggplot(df, aes(x = Var1, y = Var2, fill = value)) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) # Agar label x lebih mudah dibaca
 
 ```
+
 *Keterangan:* 
 Heatmap ini digunakan untuk menggambarkan korelasi antar variabel dalam dataset. Korelasi mengacu pada hubungan atau pengaruh yang ada antara dua variabel. Korelasi dapat menunjukkan apakah dua variabel bergerak dalam arah yang sama, berlawanan, atau tidak ada hubungan sama sekali. Dalam visualisasi ini, kita memiliki empat variabel yang
 saling berkaitan:
@@ -359,4 +361,4 @@ Dengan plot interaktif, kita bisa menggali lebih dalam tentang perbedaan antar b
 Hubungan antara pendapatan dan angka harapan hidup terlihat jelas di semua grafik, dengan pendapatan yang lebih tinggi sering kali terkait dengan angka harapan hidup yang lebih tinggi. Hal ini mengindikasikan bahwa faktor ekonomi sangat memengaruhi kualitas hidup, terutama dalam aspek kesehatan dan harapan hidup.
 Visualisasi multivariat (heatmap) membantu mengidentifikasi variabel-variabel yang saling berhubungan dan memberikan pemahaman yang lebih dalam tentang faktor-faktor yang mempengaruhi angka harapan hidup.
 Grafik interaktif membuka kesempatan bagi pengguna untuk lebih mendalami data secara individual dan dinamis, memungkinkan analisis yang lebih detail berdasarkan lokasi (benua) dan waktu (tahun).
-Secara keseluruhan, analisis visualisasi ini memberikan gambaran yang jelas tentang bagaimana faktor ekonomi dan sosial berpengaruh terhadap angka harapan hidup, serta memberi peluang untuk eksplorasi data yang lebih mendalam melalui berbagai jenis visualisasi yang interaktif.
+Secara keseluruhan, analisis visualisasi ini memberikan gambaran yang jelas tentang bagaimana faktor ekonomi dan sosial berpengaruh terhadap angka harapan hidup, serta memberi peluang untuk eksplorasi data yang lebih mendalam melalui berbagai jenis visualisasi yang interaktif. Sekian Terimakasih telah membaca.
