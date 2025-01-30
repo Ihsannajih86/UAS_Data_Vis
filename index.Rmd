@@ -1,6 +1,6 @@
 ---
 title: "UAS Visualisasi Data"
-author: "Muhammad Ihsan Najih Amani-Institut Teknologi Statistika dan Bisnis Muhammadiyah"
+author: "Software Enginer"
 NIM: "A3202300031"
 date: "`r Sys.Date()`"
 output: 
